@@ -17,7 +17,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // So we can change the text on it
     @IBOutlet weak var statePickerBtn: UIButton!
     
-    let states = ["Alaska",
+    let states = ["Non-U.S. State",
+                  "Alaska",
                   "Alabama",
                   "Arkansas",
                   "American Samoa",
@@ -90,9 +91,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
 
     // To open the picker
     @IBAction func stateBtnPressed(_ sender: Any) {
+        
+        // Show the picker
+        statePicker.isHidden = false
+        
     }
+    
+    @IBAction func buyNowBtn(_ sender: Any) {
+        
+        
+    }
+    
 
-    // Next 3 below -- Implement required functions (for UIPicker protocols)
+    // NEXT 3 BELOW -- Implement required functions (for UIPicker protocols)
     // numberOfComponents / numberOfRowsInComponent / titleForRow
     
     // "return 0" for now (at the beginning)
@@ -110,6 +121,16 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // "return "" <empty string>" for now
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return states[row]
+    }
+    
+    // ~~ For the picker (didSelectRow)
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        // What title --> The name of the selected state
+        statePickerBtn.setTitle(states[row], for: UIControlState.normal)
+        
+        // Hide the picker when state is selected
+        statePicker.isHidden = true
     }
 }
 
