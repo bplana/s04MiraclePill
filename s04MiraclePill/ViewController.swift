@@ -17,7 +17,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     // So we can change the text on it
     @IBOutlet weak var statePickerBtn: UIButton!
     
-    let states = ["Non-U.S. State",
+    @IBOutlet weak var successImg: UIImageView!
+    
+    let states = ["Non-U.S.",
                   "Alaska",
                   "Alabama",
                   "Arkansas",
@@ -95,11 +97,19 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         // Show the picker
         statePicker.isHidden = false
         
+        for i in 13...16 {
+            view.viewWithTag(i)?.isHidden = true
+        }
+        
     }
     
     @IBAction func buyNowBtn(_ sender: Any) {
         
+        for i in 1...18 {
+            view.viewWithTag(i)?.isHidden = true
+        }
         
+        successImg.isHidden = false
     }
     
 
@@ -131,6 +141,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         // Hide the picker when state is selected
         statePicker.isHidden = true
+        
+        for i in 13...16 {
+            view.viewWithTag(i)?.isHidden = false
+        }
+        
     }
 }
 
