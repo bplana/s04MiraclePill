@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     // UIPICKER -- DON'T FORGET PROTOCOLS! (Above)
     
     
@@ -18,6 +18,12 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var statePickerBtn: UIButton!
     
     @IBOutlet weak var successImg: UIImageView!
+    
+    
+    @IBOutlet weak var buyNowButton: UIButton!
+    
+    @IBOutlet weak var fullNameField: UITextField!
+    
     
     let states = ["Non-U.S.",
                   "Alaska",
@@ -83,7 +89,11 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         statePicker.dataSource = self
         statePicker.delegate = self
-    
+        
+        fullNameField.delegate = self
+        
+        setUpAddTargetFieldsNotEmpty()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -147,5 +157,41 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         }
         
     }
+    
+    // check text fields
+    func setUpAddTargetFieldsNotEmpty() {
+        
+        buyNowButton.isEnabled = false
+        fullNameField.addTarget(self, action: #selector(textFieldsNotEmpty),
+                           for: .editingChanged)
+        
+    }
+    
+    func textFieldsNotEmpty(sender: UITextField) {
+        
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
+        
+        guard
+        let name = fullNameField.text, !name.isEmpty
+        
+            else {
+                self.buyNowButton.isEnabled = false
+                return
+        }
+        buyNowButton.isEnabled = true
+    }
+    
+    // hide keyboard when user touches outside
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    // hide keyboard when enter key is pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        fullNameField.resignFirstResponder()
+        return (true)
+    }
+    
+    
 }
 

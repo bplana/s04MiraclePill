@@ -247,6 +247,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buyNowButton" destination="AQ0-Ss-NAg" id="2f7-Wl-jip"/>
+                        <outlet property="fullNameField" destination="WUf-4z-eCe" id="lgL-kY-fk4"/>
                         <outlet property="statePicker" destination="yua-5d-b9L" id="JMZ-68-DD2"/>
                         <outlet property="statePickerBtn" destination="Bxb-5P-tk1" id="5L9-lV-IET"/>
                         <outlet property="successImg" destination="Imm-V6-qs8" id="dtz-gQ-wzq"/>
